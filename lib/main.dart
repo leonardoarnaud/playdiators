@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:playdiators/tools/quick_modal.dart';
+import 'package:playdiators/ui/auth/auth_pager_widget.dart';
+import 'package:playdiators/ui/duel/setup_search_duel_pager_widget.dart';
+import 'package:playdiators/ui/home/bottom_navigation_items.dart';
+import 'package:playdiators/ui/home/duels_page_widget.dart';
+import 'package:playdiators/ui/home/ranking_page_widget.dart';
+import 'package:playdiators/ui/home/stars_page_widget.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Playdiators',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -29,77 +35,51 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentPage = 0;
-  final pageController = PageController(
+  final _pageController = PageController(
     initialPage: 0
   );
-
 
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration.zero, () =>
-        showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            builder: (BuildContext context){
-              return Container(
-                color: Colors.transparent,
-                height: MediaQuery.of(context).size.height - AppBar().preferredSize.height - 20,
-                child: Text("tela alternativa"),
-              );
-            }
-        )
-    );
-
+    showModal(context, AuthPagerWidget());
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => buildMainLayout();
 
+  Scaffold buildMainLayout() {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: PageView(
-        controller: pageController,
+        controller: _pageController,
         children: [
-          Container(child: Text("Page Duelos")),
-          Container(child: Text("Page Ranking")),
-          Container(child: Text("Page Estrelas"))
+          DuelsPageWidget(),
+          RankingPageWidget(),
+          StarsPageWidget()
         ],
-        onPageChanged: (i) => setPage(i),
+        onPageChanged: (i) => _setPage(i),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentPage,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.whatshot),
-              label: "Duelos"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.leaderboard_rounded),
-              label: "Ranking"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.star_rounded),
-              label: "Estrelas"
-          ),
-        ],
-        onTap: (i) => setPage(i),
+        items: homeNavigationItems,
+        onTap: (i) => _setPage(i),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: searchDuel(),
+        onPressed: () => showModal(context, SetupSearchDuelPagerWidget()),
         child: Icon(Icons.search),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 
-  setPage(int i) {
+  void _setPage(int i) {
     if (i != _currentPage){
       setState(() {
         _currentPage = i;
-        pageController.animateToPage(
+        _pageController.animateToPage(
             _currentPage,
             duration: Duration(milliseconds: 500),
             curve: Curves.decelerate
@@ -109,4 +89,5 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   searchDuel() {}
+
 }
