@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playdiators/theme.dart';
 import 'package:playdiators/tools/quick_modal.dart';
 import 'package:playdiators/ui/auth/auth_pager_widget.dart';
 import 'package:playdiators/ui/duel/setup_search_duel_pager_widget.dart';
@@ -16,9 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Playdiators',
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: theme,
       home: MyHomePage(title: 'Playdiators'),
     );
   }
@@ -43,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    showModal(context, AuthPagerWidget());
+    //showModal(context, AuthPagerWidget());
   }
 
   @override

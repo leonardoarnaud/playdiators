@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../strings.dart';
+
 class NickStepWidget extends StatefulWidget {
   @override
   _NickStepWidgetState createState() => _NickStepWidgetState();
@@ -12,7 +14,7 @@ class _NickStepWidgetState extends State<NickStepWidget> {
       children: [
         Row(
           children: [
-            Text("Qual seu nick?"),
+            Text(Strings.nick_step_title),
             FlatButton(
                 onPressed: () => Navigator.pop(context),
                 child: Icon(Icons.close_rounded)

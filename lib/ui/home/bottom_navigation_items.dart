@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:playdiators/theme.dart';
+import '../../strings.dart';
 
-List<BottomNavigationBarItem> homeNavigationItems = [
+const _defaultBottomNavigationStyle = TextStyle(
+    fontFamily: default_action_font
+);
+
+const List<BottomNavigationBarItem> homeNavigationItems = [
     BottomNavigationBarItem(
       icon: Icon(Icons.whatshot),
-      label: "Duelos"
+      title: Text(
+          Strings.home_navigation_first,
+          style: _defaultBottomNavigationStyle
+      ),
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.leaderboard_rounded),
-      label: "Ranking"
+        title: Text(
+            Strings.home_navigation_second,
+            style: _defaultBottomNavigationStyle
+        ),
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.star_rounded),
-      label: "Estrelas"
+        title: Text(
+            Strings.home_navigation_third,
+            style: _defaultBottomNavigationStyle
+        ),
     )
 ];
