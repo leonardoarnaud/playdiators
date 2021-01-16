@@ -29,10 +29,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentPage = 0;
+
   final pageController = PageController(
     initialPage: 0
   );
 
+  final _nickTextEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -44,9 +46,29 @@ class _MyHomePageState extends State<MyHomePage> {
             isScrollControlled: true,
             builder: (BuildContext context){
               return Container(
-                color: Colors.transparent,
                 height: MediaQuery.of(context).size.height - AppBar().preferredSize.height - 20,
-                child: Text("tela alternativa"),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text("Defina seu apelido"),
+                        FlatButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Icon(Icons.close_rounded)
+                        )
+                      ],
+                    ),
+                    Container(
+                      child: TextField(
+                        controller: _nickTextEditingController,
+                      ),
+                    ),
+                    FlatButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text("Continuar")
+                    )
+                  ],
+                ),
               );
             }
         )
@@ -91,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: searchDuel(),
         child: Icon(Icons.search),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 
