@@ -66,9 +66,3 @@ class _DuelsPageWidgetState extends State<DuelsPageWidget> {
     );
   }
 }
-/*
-Image.asset(
-                            "assets/images/sample_1.jpg",
-                          fit: BoxFit.cover,
-                        ),
- */
