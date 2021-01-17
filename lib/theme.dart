@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 
 const default_action_font = 'Playstation';
 
+const home_player_nick_text_style = TextStyle(
+    fontFamily: default_action_font,
+    color: Colors.white,
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 1.1
+);
+
 ThemeData theme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   primaryColor: const Color(0xFF0a3b5f),
